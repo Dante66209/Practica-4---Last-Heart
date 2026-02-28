@@ -1,24 +1,35 @@
 extends CanvasLayer
 
-# Notifies `Main` node that the button has been pressed
 signal start_game
 
-func show_message(text):
+@onready var lives_container := $LivesContainer
+
+
+func update_lives(lives: int) -> void:
+	for i in range(lives_container.get_child_count()):
+		lives_container.get_child(i).visible = i < lives
+
+
+func show_message(text: String) -> void:
+	# ocultar logo si estaba visible
+	if $Logo:
+		$Logo.visible = false
+
 	$Message.text = text
 	$Message.show()
 	$MessageTimer.start()
-	
-func show_game_over():
-	show_message("Game Over")
-	# Wait until the MessageTimer has counted down.
-	await $MessageTimer.timeout
 
-	$Message.text = "Dodge the Creeps!"
-	$Message.show()
-	# Make a one-shot timer and wait for it to finish.
+
+func show_game_over() -> void:
+	show_message("Game Over")
+	await $MessageTimer.timeout
+	$Message.hide()
+	$Logo.visible = true
+	# esperamos un segundo (o ajusta)
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
 	
+
 func update_score(score):
 	$ScoreLabel.text = str(score)
 
@@ -28,3 +39,4 @@ func _on_start_button_pressed():
 
 func _on_message_timer_timeout():
 	$Message.hide()
+	

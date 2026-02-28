@@ -9,5 +9,7 @@ func _ready():
 
 func _on_area_entered(area):
 	if area.is_in_group("player"):
+		$AudioStreamPlayer2D.play()
+		await $AudioStreamPlayer2D.finished
 		area.activate_speed_boost(speed_bonus, duration)
 		queue_free()

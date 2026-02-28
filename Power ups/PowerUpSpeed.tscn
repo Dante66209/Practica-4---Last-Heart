@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b0rp1vqiw6fye" path="res://Power ups/PowerUpSpeed.gd" id="1_504w8"]
 [ext_resource type="Texture2D" uid="uid://p8ysyupft1cp" path="res://art/u-removebg-preview.png" id="2_504w8"]
+[ext_resource type="AudioStream" uid="uid://dfjy7kxrm00fw" path="res://art/powerup.wav" id="3_4rifo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pil1b"]
 radius = 42.0119
@@ -17,3 +18,7 @@ texture = ExtResource("2_504w8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=404596814]
 position = Vector2(4, -2)
 shape = SubResource("CircleShape2D_pil1b")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1781114521]
+stream = ExtResource("3_4rifo")
+volume_db = 0.6

@@ -6,6 +6,8 @@ extends Node
 @export var shield_scene: PackedScene
 @export var spawn_interval: float = 10.0  # cada cuánto intentar spawnear
 @export var powerup_scenes: Array[PackedScene]
+@onready var pause_overlay = $HUD/PauseOverlay
+@onready var pause_sound = $PauseSound
 
 var score = 0
 
@@ -43,8 +45,7 @@ func _on_mob_timer_timeout():
 	add_child(mob)
 	
 
-
-func game_over():
+func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
@@ -52,7 +53,7 @@ func game_over():
 	$DeathSound.play()
 	$PowerUpTimer.stop()
 	clear_powerups() 
-	
+
 
 func clear_powerups() -> void:
 	for p in get_tree().get_nodes_in_group("powerups"):
@@ -64,22 +65,72 @@ func new_game():
 	get_tree().call_group("mobs", "queue_free") 
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	$HUD.update_lives($Player.lives)
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$Music.play()
 	$PowerUpTimer.start() 
-	
-	
-	
+	$Player.reset_lives()
+
+
 func _ready():
 	pass
 	randomize()
 	$PowerUpTimer.timeout.connect(spawn_powerup)
 	$LifetimeTimer.timeout.connect(spawn_powerup)
+	$Player.hit.connect(_on_player_hit)
+	print("Conexiones de hit:", $Player.get_signal_connection_list("hit"))
 	
+	# Crear acción "pause" si no existe
+	if not InputMap.has_action("pause"):
+		InputMap.add_action("pause")
+		var ev := InputEventKey.new()
+		ev.keycode = Key.KEY_Q   # <- CORRECTO EN GODOT 4
+		InputMap.action_add_event("pause", ev)
+
+	# Este nodo debe seguir procesando aunque el juego esté pausado
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
+	# El overlay también debe seguir activo
+	if pause_overlay:
+		pause_overlay.process_mode = Node.PROCESS_MODE_ALWAYS
+		pause_overlay.visible = false
 
 
-#powerup Shield Item-----------------------------------------------------------
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		toggle_pause()
+
+
+func toggle_pause() -> void:
+	if get_tree().paused:
+		#$UnpauseSound.play()
+		pass
+	else:
+		$PauseSound.play()
+	
+	get_tree().paused = !get_tree().paused
+	
+	if pause_overlay:
+		pause_overlay.visible = get_tree().paused
+
+func _on_player_hit(lives_left: int) -> void:
+	$HUD.update_lives(lives_left)
+
+	if lives_left > 0:
+		$RespawnTimer.start()
+		$RespawnSound.play()
+	else:
+		game_over()
+
+func _on_RespawnTimer_timeout():
+	# respawnear donde estaba el jugador (evita centro)
+	# opcional: un pequeño desplazamiento para evitar overlap con el mob
+	var respawn_pos = $Player.position + Vector2(0, -8)  # sube 8px si quieres evitar solapamiento
+	# invulnerabilidad de 2.5 segundos (ajusta)
+	$Player.start(respawn_pos, 2.5)
+
+
 
 func spawn_powerup() -> void:
 	if powerup_scenes.is_empty():

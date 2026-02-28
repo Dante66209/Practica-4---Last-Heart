@@ -3,11 +3,14 @@
 [ext_resource type="Script" uid="uid://cubsldue8k1es" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://i14cne0ne1nr" path="res://mob.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c360cadx30s73" path="res://player.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bw7owjv31oa6j" path="res://shield_item.tscn" id="3_5vw27"]
+[ext_resource type="PackedScene" uid="uid://bw7owjv31oa6j" path="res://Power ups/shield_item.tscn" id="3_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bmkb44km1twlr" path="res://hud.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://blr84w5xu5jmh" path="res://Power ups/PowerUpSpeed.tscn" id="4_5vw27"]
+[ext_resource type="Texture2D" uid="uid://duwm1uiibaxqi" path="res://art/054c26bc-170f-443a-adb4-e8591f9b1ad6.png" id="5_kek77"]
 [ext_resource type="AudioStream" uid="uid://3kwul3kex5hd" path="res://art/boom3.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://cc545m0rx4xwt" path="res://art/Chase Through Worlds.ogg" id="8_5vw27"]
+[ext_resource type="AudioStream" uid="uid://bmhmrb4gs5xn1" path="res://art/powerup2.wav" id="9_4c57u"]
+[ext_resource type="AudioStream" uid="uid://dxlfnlpbxt2rq" path="res://art/Pasuse Sound.wav" id="10_efxa6"]
 
 [sub_resource type="Curve2D" id="Curve2D_1bvp3"]
 _data = {
@@ -21,29 +24,37 @@ mob_scene = ExtResource("2_1bvp3")
 shield_scene = ExtResource("3_5vw27")
 powerup_scenes = Array[PackedScene]([ExtResource("4_5vw27"), ExtResource("3_5vw27")])
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1871186709]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.65635794, 0.67028385, 0.92573214, 1)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=588559266]
+z_index = -10
+position = Vector2(240, 362.5)
+scale = Vector2(0.47851563, 0.47851557)
+texture = ExtResource("5_kek77")
 
 [node name="Player" parent="." unique_id=1496562076 instance=ExtResource("2_h2yge")]
 
 [node name="PowerUpTimer" type="Timer" parent="." unique_id=2127457173]
+process_mode = 1
 wait_time = 5.0
 
+[node name="RespawnTimer" type="Timer" parent="." unique_id=1568395475]
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+
 [node name="LifetimeTimer" type="Timer" parent="." unique_id=597031493]
+process_mode = 1
 wait_time = 5.0
 
 [node name="ScoreTimer" type="Timer" parent="." unique_id=1364370165]
+process_mode = 1
 
 [node name="StartTimer" type="Timer" parent="." unique_id=461536955]
+process_mode = 1
 wait_time = 2.0
 one_shot = true
 
 [node name="MobTimer" type="Timer" parent="." unique_id=57457867]
+process_mode = 1
 wait_time = 0.5
 
 [node name="StartPosition" type="Marker2D" parent="." unique_id=1188334402]
@@ -58,15 +69,48 @@ rotation = -1.5707964
 
 [node name="HUD" parent="." unique_id=1421705381 instance=ExtResource("4_1bvp3")]
 
+[node name="PauseOverlay" type="CanvasLayer" parent="HUD" unique_id=471460968]
+process_mode = 3
+visible = false
+
+[node name="PauseBackground" type="Panel" parent="HUD/PauseOverlay" unique_id=1570095514]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseLabel" type="Label" parent="HUD/PauseOverlay" unique_id=957210657]
+offset_left = 105.0
+offset_top = 476.0
+offset_right = 377.0
+offset_bottom = 546.0
+text = "PAUSA
+Presiona Q para continuar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=276720241]
 stream = ExtResource("7_5vw27")
 
+[node name="RespawnSound" type="AudioStreamPlayer2D" parent="." unique_id=1234053370]
+stream = ExtResource("9_4c57u")
+
+[node name="PauseSound" type="AudioStreamPlayer2D" parent="." unique_id=1627600714]
+process_mode = 2
+stream = ExtResource("10_efxa6")
+volume_db = -5.0
+pitch_scale = 1.3
+
 [node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=596696807]
+process_mode = 1
 stream = ExtResource("8_5vw27")
+volume_db = 24.0
 autoplay = true
 
 [connection signal="hit" from="Player" to="." method="new_game "]
-[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

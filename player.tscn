@@ -95,8 +95,8 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_q13i1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1789528010]
-position = Vector2(-1.8333333, -2.478002)
-scale = Vector2(2.7738094, 2.393217)
+position = Vector2(1.0000019, 1.4999967)
+scale = Vector2(3.259259, 2.7083335)
 sprite_frames = SubResource("SpriteFrames_dw050")
 animation = &"walk"
 frame = 3
