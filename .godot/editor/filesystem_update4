@@ -1,2 +1,5 @@
+res://player.tscn
+res://player.gd
 res://main.tscn
-res://main.gd
+res://holy_beam.gd
+res://power_up_cross.tscn

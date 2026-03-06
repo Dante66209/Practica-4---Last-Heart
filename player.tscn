@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dtg1o6xk47ctq" path="res://player.gd" id="1_sweqy"]
 [ext_resource type="Texture2D" uid="uid://cpey54bpur1jc" path="res://art/up 1.png" id="2_op7ga"]
+[ext_resource type="PackedScene" uid="uid://bsge74ldmsev7" path="res://holy_beam.tscn" id="2_pylmc"]
 [ext_resource type="Texture2D" uid="uid://bjehvhom8a6au" path="res://art/shield_glow.png" id="2_q13i1"]
 [ext_resource type="Texture2D" uid="uid://jsio0k4w81ih" path="res://art/up 2.png" id="3_q13i1"]
 [ext_resource type="Texture2D" uid="uid://d1ic2v4o7g0ry" path="res://art/camina 1.png" id="4_nvl01"]
@@ -18,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dfvrytmfn3tiy" path="res://art/camina 6.png" id="9_u1c27"]
 [ext_resource type="Texture2D" uid="uid://b58r2cy7hwwin" path="res://art/camina 7.png" id="10_op7ga"]
 [ext_resource type="Texture2D" uid="uid://dsia78cydifqh" path="res://art/camina 8.png" id="11_q13i1"]
+[ext_resource type="AudioStream" uid="uid://8maporxiu65v" path="res://art/Sound_DeepScary.wav" id="20_pbfsw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dw050"]
 animations = [{
@@ -87,6 +89,7 @@ height = 48.0
 [node name="Player" type="Area2D" unique_id=1496562076]
 position = Vector2(6, 4)
 script = ExtResource("1_sweqy")
+holy_beam_scene = ExtResource("2_pylmc")
 metadata/_edit_group_ = true
 
 [node name="ShieldSprite2D" type="Sprite2D" parent="." unique_id=1232224312]
@@ -104,5 +107,9 @@ frame_progress = 0.87362427
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1603861861]
 shape = SubResource("CapsuleShape2D_hqtel")
+
+[node name="PowerupMusic" type="AudioStreamPlayer" parent="." unique_id=488548693]
+stream = ExtResource("20_pbfsw")
+volume_db = 8.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

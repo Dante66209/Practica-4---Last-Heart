@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bw7owjv31oa6j" path="res://Power ups/shield_item.tscn" id="3_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bmkb44km1twlr" path="res://hud.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://blr84w5xu5jmh" path="res://Power ups/PowerUpSpeed.tscn" id="4_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cgg6lkmjifsv2" path="res://power_up_cross.tscn" id="5_dg77c"]
 [ext_resource type="Texture2D" uid="uid://duwm1uiibaxqi" path="res://art/054c26bc-170f-443a-adb4-e8591f9b1ad6.png" id="5_kek77"]
 [ext_resource type="AudioStream" uid="uid://3kwul3kex5hd" path="res://art/boom3.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://cc545m0rx4xwt" path="res://art/Chase Through Worlds.ogg" id="8_5vw27"]
@@ -22,7 +23,7 @@ point_count = 6
 script = ExtResource("1_0xm2m")
 mob_scene = ExtResource("2_1bvp3")
 shield_scene = ExtResource("3_5vw27")
-powerup_scenes = Array[PackedScene]([ExtResource("4_5vw27"), ExtResource("3_5vw27")])
+powerup_scenes = Array[PackedScene]([ExtResource("4_5vw27"), ExtResource("5_dg77c"), ExtResource("3_5vw27")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=588559266]
 z_index = -10

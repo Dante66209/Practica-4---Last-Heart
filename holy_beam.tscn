@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bsge74ldmsev7"]
+
+[ext_resource type="Script" uid="uid://b0t0b1w17hxxa" path="res://holy_beam.gd" id="1_b8etl"]
+[ext_resource type="Texture2D" uid="uid://do15o74kvtkuj" path="res://art/luz.png" id="2_08y0e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iiha7"]
+size = Vector2(9, 30.5)
+
+[node name="HolyBeam" type="Area2D" unique_id=154394431]
+scale = Vector2(2, 2)
+script = ExtResource("1_b8etl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1155803006]
+rotation = -1.5707964
+scale = Vector2(0.043008067, 0.021323433)
+texture = ExtResource("2_08y0e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1736909285]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_iiha7")
+
+[node name="LifeTimer" type="Timer" parent="." unique_id=1922888114]
+wait_time = 3.0
+one_shot = true
+autostart = true

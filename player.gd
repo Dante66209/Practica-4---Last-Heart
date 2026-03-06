@@ -10,7 +10,14 @@ var shield_active: bool = false
 var lives := max_lives
 var screen_size # Size of the game window.
 
+@onready var powerup_music = $PowerupMusic
+@export var holy_beam_scene: PackedScene
 
+var cross_active := false
+var shoot_cooldown := 0.4
+var shoot_timer := 0.0
+
+var look_direction = Vector2.RIGHT
 
 signal hit(lives_left)
 
@@ -24,6 +31,7 @@ var invulnerable: bool = false
 
 
 func _ready():
+	
 	screen_size = get_viewport_rect().size
 	speed = base_speed
 	add_to_group("player")
@@ -69,10 +77,19 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+	if cross_active:
+		shoot_timer -= delta
+		if Input.is_action_pressed("shoot") and shoot_timer <= 0:
+			shoot_beam()
+			shoot_timer = shoot_cooldown
+
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite2D.play()
+
+		look_direction = velocity.normalized()
+
 	else:
 		$AnimatedSprite2D.stop()
 		
@@ -87,6 +104,7 @@ func _process(delta):
 	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+	
 	
 func activate_speed_boost(extra_speed: int, duration: float) -> void:
 	if speed_boost_active:
@@ -134,7 +152,6 @@ func _on_body_entered(_body):
 	shield_active = false
 	if shield_sprite:
 		shield_sprite.visible = false
-
 
 # start(pos, invul_time) - invul_time en segundos; 0 = sin invulnerabilidad
 func start(pos: Vector2, invul_time: float = 0.0) -> void:
@@ -205,3 +222,21 @@ func _on_shield_timeout() -> void:
 	shield_active = false
 	if shield_sprite:
 		shield_sprite.visible = false
+
+
+func activate_cross(time: float):
+	cross_active = true
+	powerup_music.stop()
+	powerup_music.play()
+	await get_tree().create_timer(time).timeout
+	cross_active = false
+	powerup_music.stop()
+
+func shoot_beam():
+	if holy_beam_scene == null:
+		print("⚠ HolyBeam no asignado")
+		return
+	var beam = holy_beam_scene.instantiate()
+	beam.global_position = global_position
+	beam.direction = look_direction
+	get_parent().add_child(beam)

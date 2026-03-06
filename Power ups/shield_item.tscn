@@ -9,6 +9,7 @@ radius = 89.99999
 height = 219.99998
 
 [node name="PowerUpShield" type="Area2D" unique_id=329895870]
+process_mode = 1
 script = ExtResource("1_i43of")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=398354665]

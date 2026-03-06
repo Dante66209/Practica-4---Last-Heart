@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cgg6lkmjifsv2"]
+
+[ext_resource type="Script" uid="uid://dkxouwlguhc0k" path="res://power_up_cross.gd" id="1_n1puv"]
+[ext_resource type="Texture2D" uid="uid://cep4lqavn33wp" path="res://art/Cruz.png" id="2_n1puv"]
+[ext_resource type="AudioStream" uid="uid://dfjy7kxrm00fw" path="res://art/powerup.wav" id="3_ucsbs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5r65"]
+size = Vector2(46, 91)
+
+[node name="PowerUpCross" type="Area2D" unique_id=707388256]
+script = ExtResource("1_n1puv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2037826452]
+scale = Vector2(0.2665975, 0.28581664)
+texture = ExtResource("2_n1puv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=676027641]
+position = Vector2(2, 1.5)
+shape = SubResource("RectangleShape2D_t5r65")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1742595664]
+position = Vector2(2, 1.5)
+stream = ExtResource("3_ucsbs")
+volume_db = 15.0

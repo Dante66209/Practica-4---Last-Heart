@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bmkb44km1twlr"]
 
 [ext_resource type="Script" uid="uid://drfnql1r8inc3" path="res://hud.gd" id="1_64ctp"]
-[ext_resource type="FontFile" uid="uid://d0glccdx1xk3w" path="res://fonts/Xolonium-Regular.ttf" id="2_8sq4i"]
 [ext_resource type="Texture2D" uid="uid://ct6k6y06gslmy" path="res://art/Corazón.png" id="2_640wx"]
+[ext_resource type="FontFile" uid="uid://qqfxj02gui6v" path="res://fonts/GothicPixels.ttf" id="3_640wx"]
 [ext_resource type="Texture2D" uid="uid://b7slh838qvb61" path="res://art/LOGO.png" id="4_640wx"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_64ctp"]
@@ -50,7 +50,7 @@ offset_right = 100.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_8sq4i")
+theme_override_fonts/font = ExtResource("3_640wx")
 theme_override_font_sizes/font_size = 64
 shortcut = SubResource("Shortcut_8sq4i")
 text = "Start"
@@ -63,7 +63,7 @@ offset_left = -136.5
 offset_right = 136.5
 offset_bottom = 78.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_8sq4i")
+theme_override_fonts/font = ExtResource("3_640wx")
 theme_override_font_sizes/font_size = 64
 text = "0"
 horizontal_alignment = 1
@@ -81,7 +81,7 @@ offset_right = 246.0
 offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_8sq4i")
+theme_override_fonts/font = ExtResource("3_640wx")
 theme_override_font_sizes/font_size = 64
 horizontal_alignment = 1
 vertical_alignment = 1
