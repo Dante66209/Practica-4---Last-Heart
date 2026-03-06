@@ -1,6 +1,8 @@
-res://Power ups/PowerUpSpeed.tscn::ce09bb0f185d9d1c79bcd0d12101d44b::1772068895::res://.godot/exported/133200997/export-f3c676a99a0c8ef1c830786bf670ee38-PowerUpSpeed.scn
-res://hud.tscn::398ec26c0c88ec39861ca7f98bd7ebcf::1772230179::res://.godot/exported/133200997/export-f4cf891e5f7a93b93d9b27cfb8401ccb-hud.scn
-res://main.tscn::c2ead24fde2dd4983468289c3c206df7::1772234756::res://.godot/exported/133200997/export-3070c538c03ee49b7677ff960a3f5195-main.scn
+res://Power ups/PowerUpSpeed.tscn::a3f35482a799fb1539953878219b1efc::1772689763::res://.godot/exported/133200997/export-f3c676a99a0c8ef1c830786bf670ee38-PowerUpSpeed.scn
+res://hud.tscn::8d288ffeea6cd804ca4c8c776408f0a4::1772694781::res://.godot/exported/133200997/export-f4cf891e5f7a93b93d9b27cfb8401ccb-hud.scn
+res://main.tscn::f22e947bed162779c23ef99acdfbf030::1772761506::res://.godot/exported/133200997/export-3070c538c03ee49b7677ff960a3f5195-main.scn
 res://mob.tscn::8fdca8217bdea62e6bdbdde0207248ab::1772068240::res://.godot/exported/133200997/export-5b94865898bd9b5cb44e426bf42f6f48-mob.scn
-res://player.tscn::2f1e40c54f80133e6846156b14dc00f9::1772146064::res://.godot/exported/133200997/export-36a25e342948d0ceacc500772b5412b3-player.scn
-res://Power ups/shield_item.tscn::e9e25c20cebff81419756f667a60149c::1772068457::res://.godot/exported/133200997/export-d2bf47dc2fdfe05abc9eaa1776bdc4be-shield_item.scn
+res://player.tscn::5f484b86a60a29aeff526a229aa1380a::1772764257::res://.godot/exported/133200997/export-36a25e342948d0ceacc500772b5412b3-player.scn
+res://Power ups/shield_item.tscn::92dfb63913ca12f2849b44a5bced8ba9::1772689763::res://.godot/exported/133200997/export-d2bf47dc2fdfe05abc9eaa1776bdc4be-shield_item.scn
+res://holy_beam.tscn::4948a69cc9691604fb85f15275c06485::1772728811::res://.godot/exported/133200997/export-4acb21d68779448b67cd47a56d7bebb0-holy_beam.scn
+res://power_up_cross.tscn::3ca2e37d059059fc8f657da145719e4a::1772764006::res://.godot/exported/133200997/export-668afd6258dbb4f8eb7c56702b5aa610-power_up_cross.scn
